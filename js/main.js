@@ -1,28 +1,28 @@
 
-//noinspection JSAnnotator
 /**
  * Created by megaju on 09/05/17.
  */
 const main = {
 
-    preload() {
-        // Charger les fichiers nécessaires au jeu
+    preload() { // > Charger les fichiers nécessaires au jeu
+        // player
         game.load.image('player', 'assets/player.png');
     },
-    create() {
-        // créer au début et une fois
+    create() { // > Créer au début et une fois
 
-        // paramètres de base
+        // fond de la scène
         game.stage.backgroundColor = '#2f2230';
+
         //game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        // roundPixels permet de garder un affichage propre pour le pixel-art
         game.renderer.renderSession.roundPixels = true;
 
         // Player
         this.player = game.add.sprite(game.width/2, game.height/2, 'player');
         this.player.anchor.setTo(0.5);
     },
-    update() {
-        // sur une base de 60fps
+    update() { // Sur une base de 60fps
     }
 };
 
