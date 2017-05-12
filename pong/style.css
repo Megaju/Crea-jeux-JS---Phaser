@@ -13,16 +13,23 @@ header, footer, .controls {
 }
 
 .pannel {
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameScene {
+    margin: 50px;
 }
 
 .controls {
     position: absolute;
-    right: 150px;
-    top: 30px;
+    right: 15px;
+    top: 15px;
     padding: 15px;
     background-color: #222;
     color: #cccccc;
+    font-size: .7em;
 }
 
 .controls h2 {
@@ -39,4 +46,7 @@ header, footer, .controls {
 }
 
 footer {
+    width: calc(100% - 4px);
+    position: absolute;
+    bottom: 0;
 }

@@ -3,14 +3,14 @@
  */
 
 var emitter;
-var scoreP1 = 0;
-var scoreP2 = 0;
+var scoreL = 0;
+var scoreR = 0;
 
-document.querySelector(".scoreP1").innerHTML = `
-                    ${scoreP1}
+document.querySelector(".scoreL").innerHTML = `
+                    ${scoreL}
                 `;
-document.querySelector(".scoreP2").innerHTML = `
-                    ${scoreP2}
+document.querySelector(".scoreR").innerHTML = `
+                    ${scoreR}
                 `;
 
 const mainsState = {
@@ -29,25 +29,25 @@ const mainsState = {
         // centrer la scène du jeu
         game.scale.pageAlignHorizontally = true;
 
-        // player bottom
-        this.player = game.add.sprite(game.width/2, game.height-40, 'platform');
-        this.player.anchor.setTo(0.5);
-        this.player.body.collideWorldBounds = true;
-        this.player.body.immovable = true; // empêche que la platform soit poussé par la balle
+        // playerR
+        this.playerR = game.add.sprite(game.width-40, game.height/2, 'platform');
+        this.playerR.anchor.setTo(0.5);
+        this.playerR.body.collideWorldBounds = true;
+        this.playerR.body.immovable = true; // empêche que la platform soit poussé par la balle
 
-        // assignation des touches player bottom
-        this.left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-        this.right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        // assignation des touches playerR
+        this.upR = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+        this.downR = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 
-        // player top
-        this.player2 = game.add.sprite(game.width/2, 40, 'platform');
-        this.player2.anchor.setTo(0.5);
-        this.player2.body.collideWorldBounds = true;
-        this.player2.body.immovable = true; // empêche que la platform soit poussé par la balle
+        // playerL
+        this.playerL = game.add.sprite(40, game.height/2, 'platform');
+        this.playerL.anchor.setTo(0.5);
+        this.playerL.body.collideWorldBounds = true;
+        this.playerL.body.immovable = true; // empêche que la platform soit poussé par la balle
 
-        // assignation des touches player top
-        this.leftP2 = game.input.keyboard.addKey(Phaser.Keyboard.Q);
-        this.rightP2 = game.input.keyboard.addKey(Phaser.Keyboard.D);
+        // assignation des touches playerL
+        this.upL = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+        this.downL = game.input.keyboard.addKey(Phaser.Keyboard.S);
 
         // ball
         this.ball = game.add.sprite(game.width/2, game.height/2, 'ball');
@@ -68,42 +68,42 @@ const mainsState = {
     },
     update() {
         // collide avec les platform des joueurs
-        game.physics.arcade.collide([this.player, this.player2], this.ball);
+        game.physics.arcade.collide([this.playerR, this.playerL], this.ball);
 
-        // cas de défaite player bottom
-        if (this.ball.y > this.player.y+20) {
-            scoreP2++;
-            document.querySelector(".scoreP2").innerHTML = `
-                    ${scoreP2}
+        // cas de défaite playerR bottom
+        if (this.ball.x > this.playerR.x+20) {
+            scoreL++;
+            document.querySelector(".scoreL").innerHTML = `
+                    ${scoreL}
                 `;
             game.state.start('main'); // on redémarre le jeu
         }
 
-        // cas de défaite player top
-        if (this.ball.y < this.player2.y-20) {
-            scoreP1++;
-            document.querySelector(".scoreP1").innerHTML = `
-                    ${scoreP1}
+        // cas de défaite playerL
+        if (this.ball.x < this.playerL.x-20) {
+            scoreR++;
+            document.querySelector(".scoreR").innerHTML = `
+                    ${scoreR}
                 `;
             game.state.start('main'); // on redémarre le jeu
         }
 
-        // mouvement player bottom
-        if (this.left.isDown) {
-            this.player.body.velocity.x = -300;
-        } else if (this.right.isDown) {
-            this.player.body.velocity.x = 300;
+        // mouvement playerR bottom
+        if (this.upR.isDown) {
+            this.playerR.body.velocity.y = -300;
+        } else if (this.downR.isDown) {
+            this.playerR.body.velocity.y = 300;
         } else {
-            this.player.body.velocity.x = 0;
+            this.playerR.body.velocity.y = 0;
         }
 
-        // mouvement player top
-        if (this.leftP2.isDown) {
-            this.player2.body.velocity.x = -300;
-        } else if (this.rightP2.isDown) {
-            this.player2.body.velocity.x = 300;
+        // mouvement playerR top
+        if (this.upL.isDown) {
+            this.playerL.body.velocity.y = -300;
+        } else if (this.downL.isDown) {
+            this.playerL.body.velocity.y = 300;
         } else {
-            this.player2.body.velocity.x = 0;
+            this.playerL.body.velocity.y = 0;
         }
 
         // particle
@@ -125,6 +125,6 @@ const mainsState = {
 };
 
 // START ! ! !
-const game = new Phaser.Game(360, 640, Phaser.AUTO, 'gameDiv');
+const game = new Phaser.Game(640, 320, Phaser.AUTO, 'gameDiv');
 game.state.add('main', mainsState);
 game.state.start('main');
