@@ -2,6 +2,8 @@
  * Created by megaju on 12/05/17.
  */
 
+var emitter;
+
 const mainsState = {
     preload() {
         game.load.image('platform', 'assets/platform.png');
@@ -46,7 +48,14 @@ const mainsState = {
         this.ball.body.velocity.x = 300;
         this.ball.body.velocity.y = 300;
 
-        
+        // système de particule
+        emitter = game.add.emitter(game.world.centerX, game.world.centerY, 400);
+        emitter.makeParticles(['particle']);
+        emitter.gravity = 200;
+        emitter.setAlpha(0.5, 0, 500);
+        emitter.setScale(0.8, 0, 0.8, 0, 500);
+
+        emitter.start(false, 1000, 120);
     },
     update() {
         // collide avec les platform des joueurs
@@ -79,6 +88,22 @@ const mainsState = {
         } else {
             this.player2.body.velocity.x = 0;
         }
+
+        // particle
+        var px = this.ball.body.velocity.x;
+        var py = this.ball.body.velocity.y;
+
+        px *= -1;
+        py *= -1;
+
+        emitter.minParticleSpeed.set(px, py);
+        emitter.maxParticleSpeed.set(px, py);
+
+        emitter.emitX = this.ball.x;
+        emitter.emitY = this.ball.y;
+
+        // emitter.forEachExists(game.world.wrap, game.world);
+        game.world.wrap(this.ball, 64);
     }
 };
 
