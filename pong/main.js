@@ -37,7 +37,6 @@ const mainsState = {
         game.load.image('particle', 'assets/particle.png');
     },
     create() {
-
         // fond, physique
         game.stage.backgroundColor = '#ccc';
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -60,7 +59,8 @@ const mainsState = {
         this.playerL.body.immovable = true; // empêche que la platform soit poussé par la balle
 
         // assignation des touches playerL
-        this.upL = game.input.keyboard.addKey(Phaser.Keyboard.Z);
+        this.upLw = game.input.keyboard.addKey(Phaser.Keyboard.W);
+        this.upLz = game.input.keyboard.addKey(Phaser.Keyboard.Z);
         this.downL = game.input.keyboard.addKey(Phaser.Keyboard.S);
 
         // ball
@@ -115,7 +115,7 @@ const mainsState = {
             }
         }
 
-        // mouvement playerR bottom
+        // mouvement playerR
         if (this.upR.isDown) {
             this.playerR.body.velocity.y = -300;
         } else if (this.downR.isDown) {
@@ -124,8 +124,8 @@ const mainsState = {
             this.playerR.body.velocity.y = 0;
         }
 
-        // mouvement playerR top
-        if (this.upL.isDown) {
+        // mouvement playerL
+        if (this.upLw.isDown || this.upLz.isDown) {
             this.playerL.body.velocity.y = -300;
         } else if (this.downL.isDown) {
             this.playerL.body.velocity.y = 300;
