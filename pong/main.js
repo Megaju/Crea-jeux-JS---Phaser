@@ -2,9 +2,26 @@
  * Created by megaju on 12/05/17.
  */
 
+const game = new Phaser.Game(640, 320, Phaser.AUTO, 'gameDiv');
+
 var emitter;
 var scoreL = 0;
 var scoreR = 0;
+var ballScale = 0.9;
+
+function result(scoreR, scoreL, sprite) {
+    sprite.destroy();
+    if (scoreR > scoreL) {
+        // Player Right win !
+        document.querySelector(".result").innerHTML = `Player right win !!!`;
+    } else if (scoreR === scoreL) {
+        // Egality
+        document.querySelector(".result").innerHTML = `Egality`;
+    } else {
+        // Player Left win !
+        document.querySelector(".result").innerHTML = `Player left win !!!`;
+    }
+}
 
 document.querySelector(".scoreL").innerHTML = `
                     ${scoreL}
@@ -25,9 +42,6 @@ const mainsState = {
         game.stage.backgroundColor = '#ccc';
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.world.enableBody = true; // sur tout les obj, la physique ARCADE est active
-
-        // centrer la scène du jeu
-        game.scale.pageAlignHorizontally = true;
 
         // playerR
         this.playerR = game.add.sprite(game.width-40, game.height/2, 'platform');
@@ -56,6 +70,7 @@ const mainsState = {
         this.ball.body.bounce.setTo(1); // 1 = valeur max, elle ne perd pas de sa force
         this.ball.body.velocity.x = 300;
         this.ball.body.velocity.y = 300;
+        this.ball.scale.setTo(ballScale);
 
         // système de particule
         emitter = game.add.emitter(game.world.centerX, game.world.centerY, 400);
@@ -76,7 +91,13 @@ const mainsState = {
             document.querySelector(".scoreL").innerHTML = `
                     ${scoreL}
                 `;
-            game.state.start('main'); // on redémarre le jeu
+            ballScale = ballScale - 0.1;
+            if (ballScale <= 0) {
+                // end game
+                result(scoreR, scoreL, this.ball);
+            } else {
+                game.state.start('main'); // on redémarre le jeu
+            }
         }
 
         // cas de défaite playerL
@@ -85,7 +106,13 @@ const mainsState = {
             document.querySelector(".scoreR").innerHTML = `
                     ${scoreR}
                 `;
-            game.state.start('main'); // on redémarre le jeu
+            ballScale = ballScale - 0.1;
+            if (ballScale <= 0) {
+                // end game
+                result(scoreR, scoreL, this.ball);
+            } else {
+                game.state.start('main'); // on redémarre le jeu
+            }
         }
 
         // mouvement playerR bottom
@@ -110,21 +137,14 @@ const mainsState = {
         var px = this.ball.body.velocity.x;
         var py = this.ball.body.velocity.y;
 
-        px *= -1;
-        py *= -1;
-
         emitter.minParticleSpeed.set(px, py);
         emitter.maxParticleSpeed.set(px, py);
 
         emitter.emitX = this.ball.x;
         emitter.emitY = this.ball.y;
-
-        // emitter.forEachExists(game.world.wrap, game.world);
-        game.world.wrap(this.ball, 64);
-    }
+    },
 };
 
 // START ! ! !
-const game = new Phaser.Game(640, 320, Phaser.AUTO, 'gameDiv');
 game.state.add('main', mainsState);
 game.state.start('main');
