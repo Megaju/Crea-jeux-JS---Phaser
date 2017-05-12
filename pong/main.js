@@ -3,6 +3,15 @@
  */
 
 var emitter;
+var scoreP1 = 0;
+var scoreP2 = 0;
+
+document.querySelector(".scoreP1").innerHTML = `
+                    ${scoreP1}
+                `;
+document.querySelector(".scoreP2").innerHTML = `
+                    ${scoreP2}
+                `;
 
 const mainsState = {
     preload() {
@@ -11,6 +20,7 @@ const mainsState = {
         game.load.image('particle', 'assets/particle.png');
     },
     create() {
+
         // fond, physique
         game.stage.backgroundColor = '#ccc';
         game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -18,7 +28,6 @@ const mainsState = {
 
         // centrer la scène du jeu
         game.scale.pageAlignHorizontally = true;
-        game.scale.pageAlignVertically = true;
 
         // player bottom
         this.player = game.add.sprite(game.width/2, game.height-40, 'platform');
@@ -63,11 +72,19 @@ const mainsState = {
 
         // cas de défaite player bottom
         if (this.ball.y > this.player.y+20) {
+            scoreP2++;
+            document.querySelector(".scoreP2").innerHTML = `
+                    ${scoreP2}
+                `;
             game.state.start('main'); // on redémarre le jeu
         }
 
         // cas de défaite player top
         if (this.ball.y < this.player2.y-20) {
+            scoreP1++;
+            document.querySelector(".scoreP1").innerHTML = `
+                    ${scoreP1}
+                `;
             game.state.start('main'); // on redémarre le jeu
         }
 
@@ -108,6 +125,6 @@ const mainsState = {
 };
 
 // START ! ! !
-const game = new Phaser.Game(360, 640);
+const game = new Phaser.Game(360, 640, Phaser.AUTO, 'gameDiv');
 game.state.add('main', mainsState);
 game.state.start('main');

@@ -8,8 +8,35 @@ body {
     text-align: center;
 }
 
-footer {
-    width: 100%;
+header, footer, .controls {
+    border: 2px solid #eee;
+}
+
+.pannel {
+    
+}
+
+.controls {
     position: absolute;
-    bottom: 0;
+    right: 150px;
+    top: 30px;
+    padding: 15px;
+    background-color: #222;
+    color: #cccccc;
+}
+
+.controls h2 {
+    padding-bottom: 7px;
+    border-bottom: 1px solid #aaa;
+}
+
+.controls h2, .controls h3, .controls p {
+    margin: 0 0 15px 0;
+}
+
+[class*="score"] {
+    font-size: 2em;
+}
+
+footer {
 }

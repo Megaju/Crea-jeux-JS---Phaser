@@ -5,15 +5,36 @@
     <title>Pong</title>
     <link rel="stylesheet" href="style.css">
     <script src="../lib/phaser.min.js"></script>
-    <script src="main.js"></script>
 </head>
 <body>
     <header>
         <h1>PONG</h1>
     </header>
 
+    <div class="pannel">
+        <!-- game control player -->
+        <div class="controls">
+            <h2>CONTROLS</h2>
+            <h3>Bottom player</h3>
+            <p>Left and Right arrow keys</p>
+            <h3>Top player</h3>
+            <p>Q - left and D - right</p>
+        </div>
+
+        <div>
+            <!-- score player top -->
+            <p class="scoreP2"></p>
+            <!-- scene -->
+            <div id="gameDiv"></div>
+            <!-- score player bottom -->
+            <p class="scoreP1"></p>
+        </div>
+    </div>
+
     <footer>
-        <p>Coded quickly by Megaju.</p>
+        <p>Coded quickly with Phaser by Megaju.</p>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
