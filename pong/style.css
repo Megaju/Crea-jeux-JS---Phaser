@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #111;
+    color: #eee;
+    font-weight: 700;
+    font-family: "Courier 10 Pitch", sans-serif;
+    text-align: center;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
