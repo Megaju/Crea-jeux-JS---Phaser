@@ -68,7 +68,13 @@ const mainsState = {
         this.ball.anchor.setTo(0.5);
         this.ball.body.collideWorldBounds = true;
         this.ball.body.bounce.setTo(1); // 1 = valeur max, elle ne perd pas de sa force
-        this.ball.body.velocity.x = 300;
+        let randDirectionBall = Math.floor((Math.random() * 10) +1);
+        console.log(randDirectionBall);
+        if (randDirectionBall < 5) {
+            this.ball.body.velocity.x = -300;
+        } else {
+            this.ball.body.velocity.x = 300;
+        }
         this.ball.body.velocity.y = 300;
         this.ball.scale.setTo(ballScale);
 
