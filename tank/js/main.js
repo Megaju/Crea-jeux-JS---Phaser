@@ -4,8 +4,7 @@
 
 const game = new Phaser.Game(640, 480, Phaser.CANVAS, 'game');
 
-const mainState = {
-
+const main = {
     init() {
         game.renderer.renderSession.roundPixels = true;
         game.world.setBounds(0, 0, 992, 480);
@@ -14,15 +13,15 @@ const mainState = {
     },
     preload() {
         //  Note: Graphics from Amiga Tanx Copyright 1991 Gary Roberts
-        game.load.image('tank', 'assets/tank.png');
-        game.load.image('turret', 'assets/turret.png');
-        game.load.image('bullet', 'assets/bullet.png');
-        game.load.image('background', 'assets/background.png');
-        game.load.image('flame', 'assets/flame.png');
-        game.load.image('target', 'assets/target.png');
+        this.load.image('tank', 'assets/tank.png');
+        this.load.image('turret', 'assets/turret.png');
+        this.load.image('bullet', 'assets/bullet.png');
+        this.load.image('background', 'assets/background.png');
+        this.load.image('flame', 'assets/flame.png');
+        this.load.image('target', 'assets/target.png');
     },
     create() {
-        game.add.tileSprite(0, 0, 992, 480, 'background');
+        this.add.tileSprite(0, 0, 992, 480, 'background');
 
         // targets
         this.targets = this.add.group(this.game.world, 'targets', false, true, Phaser.Physics.ARCADE);
@@ -49,11 +48,16 @@ const mainState = {
         this.flame.anchor.set(0.5);
         this.flame.visible = false;
 
+        // power of the shot
+        game.power = 300;
+        this.powerText = this.add.text(8, 8, 'Power: 300', { font: "18px Arial", fill: "#ffffff" });
+        this.powerText.setShadow(1, 1, 'rgba(0, 0, 0, 0.8)', 1);
+        this.powerText.fixedToCamera = true;
     },
     update() {
 
     },
 };
 
-game.state.add('main', mainState);
+game.state.add('main', main);
 game.state.start('main');
