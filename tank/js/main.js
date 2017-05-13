@@ -4,13 +4,13 @@
 
 const game = new Phaser.Game(640, 480, Phaser.CANVAS, 'game');
 
-const main = {
+const mainState = {
 
     init() {
         game.renderer.renderSession.roundPixels = true;
         game.world.setBounds(0, 0, 992, 480);
-        physics.startSystem(Phaser.Physics.ARCADE);
-        physics.arcade.gravity.y = 200;
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        game.physics.arcade.gravity.y = 200;
     },
     preload() {
         //  Note: Graphics from Amiga Tanx Copyright 1991 Gary Roberts
@@ -22,10 +22,13 @@ const main = {
         game.load.image('target', 'assets/target.png');
     },
     create() {
-        this.background = game.add.sprite(0, 0, 'background');
+        game.add.tileSprite(0, 0, 992, 480, 'background');
+
     },
     update() {
 
     },
-
 };
+
+game.state.add('main', mainState);
+game.state.start('main');
