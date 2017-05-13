@@ -42,6 +42,8 @@ const mainState = {
 
         //tank
         this.tank = this.add.sprite(24, 383, 'tank');
+        // this turret
+        this.turret = this.add.sprite(this.tank.x + 30, this.tank.y + 14, 'turret');
 
     },
     update() {
