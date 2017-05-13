@@ -32,7 +32,16 @@ const mainState = {
         this.targets.create(700, 390, 'target');
         this.targets.create(900, 390, 'target');
 
+        // strop gravity for targets
         this.targets.setAll('body.allowGravity', false);
+
+        // bullet
+        this.bullet = this.add.sprite(0, 0, 'bullet');
+        this.bullet.exists = false;
+        this.physics.arcade.enable(this.bullet);
+
+        //tank
+        this.tank = this.add.sprite(24, 383, 'tank');
 
     },
     update() {
