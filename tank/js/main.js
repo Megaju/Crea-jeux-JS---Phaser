@@ -13,7 +13,12 @@ const main = {
         physics.arcade.gravity.y = 200;
     },
     preload() {
-
+        game.load.image('tank', 'assets/tank.png');
+        game.load.image('turret', 'assets/turret.png');
+        game.load.image('bullet', 'assets/bullet.png');
+        game.load.image('background', 'assets/background.png');
+        game.load.image('flame', 'assets/flame.png');
+        game.load.image('target', 'assets/target.png');
     },
     create() {
 
