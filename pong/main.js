@@ -2,7 +2,7 @@
  * Created by megaju on 12/05/17.
  */
 
-const game = new Phaser.Game(640, 320, Phaser.AUTO, 'gameDiv');
+const game = new Phaser.Game(640, 320, Phaser.CANVAS, 'gameDiv');
 
 var emitter;
 var scoreL = 0;

@@ -22,7 +22,7 @@ const main = {
         game.load.image('target', 'assets/target.png');
     },
     create() {
-
+        this.background = game.add.sprite(0, 0, 'background');
     },
     update() {
 
