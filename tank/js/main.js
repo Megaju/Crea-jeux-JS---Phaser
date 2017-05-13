@@ -24,6 +24,16 @@ const mainState = {
     create() {
         game.add.tileSprite(0, 0, 992, 480, 'background');
 
+        // targets
+        this.targets = this.add.group(this.game.world, 'targets', false, true, Phaser.Physics.ARCADE);
+
+        this.targets.create(300, 390, 'target');
+        this.targets.create(500, 390, 'target');
+        this.targets.create(700, 390, 'target');
+        this.targets.create(900, 390, 'target');
+
+        this.targets.setAll('body.allowGravity', false);
+
     },
     update() {
 
