@@ -13,6 +13,7 @@ const main = {
         physics.arcade.gravity.y = 200;
     },
     preload() {
+        //  Note: Graphics from Amiga Tanx Copyright 1991 Gary Roberts
         game.load.image('tank', 'assets/tank.png');
         game.load.image('turret', 'assets/turret.png');
         game.load.image('bullet', 'assets/bullet.png');
